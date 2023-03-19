@@ -7,11 +7,12 @@ const Button = (props) => {
   </button>
   )
 }
-const Display = (props) => {
+const StatisticsLine = (props) => {
   return(
-    <a>
-      {props.text} {props.type}<br />
-    </a>
+    <tr>
+      <td>{props.text}</td>
+      <td>{props.type}</td>
+    </tr>
   )
 }
 
@@ -27,14 +28,16 @@ const Statistics = (props) => {
     )
   }
   return(
-    <div>
-    <Display type={props.good} text="good" />
-    <Display type={props.neutral} text="neutral" />
-    <Display type={props.bad} text="bad" />
-    <Display type={total} text="all" />     
-    <Display type={average} text="average" />
-    <Display type={positive} text="positive" />
-    </div>
+    <table>
+      <tbody>
+        <StatisticsLine type={props.good} text="good" />
+        <StatisticsLine type={props.neutral} text="neutral" />
+        <StatisticsLine type={props.bad} text="bad" />
+        <StatisticsLine type={total} text="all" />     
+        <StatisticsLine type={average} text="average" />
+        <StatisticsLine type={positive} text="positive" />
+      </tbody>
+    </table>
   )
 }
 
