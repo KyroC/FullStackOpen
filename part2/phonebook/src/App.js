@@ -27,6 +27,7 @@ const App = () => {
       number: newNumber,
       id: persons.length + 1
     };
+    console.log(personObject);
     persons.map(person => {
       if(personObject.name === person.name){
         alert(`${newName} is already added to phonebook`)
@@ -44,6 +45,18 @@ const App = () => {
 
     }
   }
+
+  const deletePerson =(event)=> {
+    var result = window.confirm(`Delete ${event.name}?`)
+    if(result){
+    personService
+    .deleteService(event.id)
+    .then(x => {
+      setPersons(persons.filter(person => person.id !== event.id)
+    )})
+    }
+}
+
 
   const handleNameChange = (event) => {
     setNewName(event.target.value)
@@ -68,7 +81,7 @@ const App = () => {
         handleNumberChange={handleNumberChange}
         />
       <h3>Numbers</h3>
-      <Display persons={persons} newSearch={newSearch}/>
+      <Display persons={persons} newSearch={newSearch} deletePerson ={deletePerson}/>
     </div>
   )
 }
