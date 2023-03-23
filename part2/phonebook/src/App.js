@@ -8,11 +8,20 @@ const App = () => {
 
   const addPerson = (event) => {
     event.preventDefault();
+    let duplicate = false;
     const personObject = {
       name: newName
     };
-    setPersons(persons.concat(personObject));
-    setNewName('');
+    persons.map(person => {
+      if(personObject.name === person.name){
+        alert(`${newName} is already added to phonebook`)
+        duplicate = true;
+      }}
+      )
+    if(duplicate === false) {
+      setPersons(persons.concat(personObject));
+      setNewName('');
+    }
   }
 
   const handleOnChange = (event) => {
