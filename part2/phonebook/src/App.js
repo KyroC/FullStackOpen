@@ -2,15 +2,18 @@ import { useState } from 'react'
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas' }
+    { name: 'Arto Hellas',
+      number: '91234567' }
   ]) 
-  const [newName, setNewName] = useState('')
+  const [newName, setNewName] = useState('');
+  const [newNumber, setNewNumber] = useState('');
 
   const addPerson = (event) => {
     event.preventDefault();
     let duplicate = false;
     const personObject = {
-      name: newName
+      name: newName,
+      number: newNumber
     };
     persons.map(person => {
       if(personObject.name === person.name){
@@ -21,11 +24,15 @@ const App = () => {
     if(duplicate === false) {
       setPersons(persons.concat(personObject));
       setNewName('');
+      setNewNumber('');
     }
   }
 
-  const handleOnChange = (event) => {
+  const handleNameChange = (event) => {
     setNewName(event.target.value)
+  }
+  const handleNumberChange = (event) => {
+    setNewNumber(event.target.value)
   }
 
   return (
@@ -35,8 +42,13 @@ const App = () => {
         <div>
           name: <input  
                 value= {newName}
-                onChange={handleOnChange}
+                onChange={handleNameChange}
                 />
+        </div>
+        <div>number: <input 
+                      value ={newNumber}
+                      onChange={handleNumberChange}/>
+        
         </div>
         <div>
           <button type="submit" >add</button>
@@ -44,7 +56,7 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
         {
-        persons.map(person=> <div key={person.name}>{person.name}</div> )
+        persons.map(person=> <div key={person.name}>{person.name} {person.number}</div> )
         } 
     </div>
   )
