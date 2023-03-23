@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import Display from './components/Display';
+import Filter from './components/Filter';
+import PersonForm from './components/PersonForm';
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -11,20 +14,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('');
   const [newSearch, setNewSearch] = useState('');
 
-  const Display = (prop) => {
-    if(newSearch !== '') {
-      return (
-      prop.persons.filter(person => person.name.includes(newSearch)).map(filteredPerson => 
-        <div key={filteredPerson.id}> {filteredPerson.name} {filteredPerson.number}</div>)
-        )
-      }else {
-      return(
-      prop.persons.map(person =>
-        <div key={person.id}> {person.name} {person.number}</div>
-      )
-      )
-    }
-  }
+
   const addPerson = (event) => {
     event.preventDefault();
     let duplicate = false;
@@ -59,30 +49,17 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <form>
-        <div>filter shown with a <input onChange={handleSearchChange}></input>
-        </div>
-      </form>
-      
-      <form onSubmit={addPerson}>
-        <h2>Add a new:</h2>
-        <div>
-          name: <input  
-                value= {newName}
-                onChange={handleNameChange}
-                />
-        </div>
-        <div>number: <input 
-                      value ={newNumber}
-                      onChange={handleNumberChange}/>
-        
-        </div>
-        <div>
-          <button type="submit" >add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
-      <Display persons={persons}/>
+      <Filter handleSearchChange={handleSearchChange}/>
+      <h3>Add a new:</h3>
+      <PersonForm 
+        addPerson={addPerson}
+        newName={newName}
+        handleNameChange={handleNameChange}
+        newNumber={newNumber}
+        handleNumberChange={handleNumberChange}
+        />
+      <h3>Numbers</h3>
+      <Display persons={persons} newSearch={newSearch}/>
     </div>
   )
 }
