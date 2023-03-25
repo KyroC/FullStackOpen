@@ -4,12 +4,14 @@ import Display from './components/Display';
 import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
 import personService from './services/persons.js'
+import Notification from "./components/Notification"
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
   const [newSearch, setNewSearch] = useState('');
+  const [addedMessage, setAddedMessage] = useState(null);
 
   useEffect(() => {
     console.log("Effects")
@@ -38,6 +40,12 @@ const App = () => {
       axios
         .post('http://localhost:3001/persons', personObject)
         .then(response => {
+          setAddedMessage(
+            `Added ${newName}`
+          )
+          setTimeout(() => {
+            setAddedMessage(null)
+          },5000)
           setPersons(persons.concat(response.data))
           setNewName('');
           setNewNumber('');
@@ -71,6 +79,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={addedMessage}/>
       <Filter handleSearchChange={handleSearchChange}/>
       <h3>Add a new:</h3>
       <PersonForm 
