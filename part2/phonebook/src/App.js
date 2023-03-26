@@ -38,7 +38,7 @@ const App = () => {
       )
     if(duplicate === false) {
       axios
-        .post('http://localhost:3001/persons', personObject)
+        .post('http://localhost:3001/api/persons', personObject)
         .then(response => {
           setAddedMessage(
             `Added ${newName}`
