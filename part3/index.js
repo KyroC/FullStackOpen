@@ -1,8 +1,18 @@
-const express = require('express')
-const morgan = require('morgan')
-const cors = require('cors')
-const app = express()
+const express = require('express');
+const morgan = require('morgan');
+const cors = require('cors');
+const app = express();
+const mongoose = require('mongoose');
+const url =`mongodb+srv://fullstack:${password}@fso.pn4e3er.mongodb.net/phoneApp?retryWrites=true&w=majority`
+mongoose.set('strictQuery',false)
+mongoose.connect(url)
 
+const personSchema = new mongoose.Schema({
+  name: String,
+  number: String,
+})
+
+const Person = mongoose.model('Person', personSchema)
 
 app.use(express.json());
 app.use(morgan('tiny'))
