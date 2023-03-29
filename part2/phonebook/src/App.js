@@ -1,10 +1,11 @@
-import { useState,useEffect } from 'react'
+import { useState,useEffect } from 'react';
 import axios from 'axios';
 import Display from './components/Display';
 import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
-import personService from './services/persons.js'
-import Notification from "./components/Notification"
+import personService from './services/persons.js';
+import Notification from "./components/Notification";
+const baseUrl = '/api/persons';
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
@@ -38,7 +39,7 @@ const App = () => {
       )
     if(duplicate === false) {
       axios
-        .post('http://localhost:3001/api/persons', personObject)
+        .post(`${baseUrl}`, personObject)
         .then(response => {
           setAddedMessage(
             `Added ${newName}`
