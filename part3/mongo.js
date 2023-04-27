@@ -10,9 +10,8 @@ const password = process.argv[2]
 const name = process.argv[3]
 const number = process.argv[4]
 
-const url = process.env.MONGODB_URI
+const url = `mongodb+srv://fullstack:${password}@cluster0.s2vwcui.mongodb.net/?retryWrites=true&w=majority`
 // eslint-disable-next-line no-unexpected-multiline
-`mongodb+srv://fullstack:${password}@fso.pn4e3er.mongodb.net/phoneApp?retryWrites=true&w=majority`
 
 mongoose.set('strictQuery',false)
 mongoose.connect(url)
