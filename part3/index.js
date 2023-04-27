@@ -59,7 +59,7 @@ app.get('/api/persons', (request, response) => {
   })
 })
 
-app.get('/api/persons/:id', (request, response) => {
+app.get('/api/persons/:id', (request, response, next) => {
   console.log(request.params.id)
   Person.findById(request.params.id)
     .then(person => {
@@ -72,7 +72,7 @@ app.get('/api/persons/:id', (request, response) => {
     // eslint-disable-next-line no-undef
     .catch(error => next(error))
 })
-app.delete('/api/persons/:id', (request,response, next) => {
+app.delete('/api/persons/:id', (request, response, next) => {
   Person.findByIdAndRemove(request.params.id)
     // eslint-disable-next-line no-unused-vars
     .then(result => {
